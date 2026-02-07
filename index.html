@@ -13,14 +13,6 @@
       padding: 0;
       overflow: hidden;
     }
-    .container {
-      margin-top: 100px;
-    }
-    img {
-      width: 300px;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    }
     h1 {
       margin-top: 20px;
       font-size: 28px;
@@ -57,20 +49,37 @@
       height: 100%;
       pointer-events: none;
     }
+    #lovePic {
+      width: 300px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      display: none;
+      margin-top: 20px;
+    }
   </style>
 </head>
 <body>
-  <div class="container">
-    <img src="https://github.com/VKumar881/proposal/blob/main/ji.jpeg" alt="Love Image">
-    <h1>"Will you be the love of my life forever?"</h1>
-    <div class="buttons">
-      <button class="yes" onclick="celebrate()">Yes</button>
-      <button class="no" id="noBtn">No</button>
-    </div>
+  <h1>"Will you be the love of my life forever?"</h1>
+
+  <!-- Toggle button for image -->
+  <button onclick="toggleImage()">💖 Show Picture 💖</button>
+  <br><br>
+  <img id="lovePic" src="https://raw.githubusercontent.com/VKumar881/proposal/main/ji.jpeg" alt="Love Image">
+
+  <div class="buttons">
+    <button class="yes" onclick="celebrate()">Yes</button>
+    <button class="no" id="noBtn">No</button>
   </div>
+
   <canvas id="celebration"></canvas>
 
   <script>
+    // Toggle image visibility
+    function toggleImage() {
+      const img = document.getElementById('lovePic');
+      img.style.display = (img.style.display === 'none') ? 'block' : 'none';
+    }
+
     // Make "No" button run away
     const noBtn = document.getElementById('noBtn');
     noBtn.addEventListener('mouseover', () => {
@@ -83,7 +92,7 @@
       noBtn.style.top = newY + 'px';
     });
 
-    // Heart celebration
+    // Confetti + Hearts celebration
     function celebrate() {
       alert('Yay! You said YES ❤️');
       const canvas = document.getElementById('celebration');
@@ -91,14 +100,15 @@
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
 
-      const hearts = [];
-      for (let i = 0; i < 100; i++) {
-        hearts.push({
+      const particles = [];
+      for (let i = 0; i < 150; i++) {
+        particles.push({
           x: Math.random() * canvas.width,
-          y: canvas.height + Math.random() * 200,
-          size: Math.random() * 20 + 10,
+          y: Math.random() * canvas.height - canvas.height,
+          size: Math.random() * 8 + 4,
           speed: Math.random() * 2 + 1,
-          color: `hsl(${Math.random() * 30 + 330}, 100%, 60%)`
+          type: Math.random() > 0.5 ? 'confetti' : 'heart',
+          color: `hsl(${Math.random() * 360}, 100%, 50%)`
         });
       }
 
@@ -117,12 +127,19 @@
 
       function draw() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        hearts.forEach(h => {
-          drawHeart(h.x, h.y, h.size, h.color);
-          h.y -= h.speed;
-          if (h.y < -20) {
-            h.y = canvas.height + 20;
-            h.x = Math.random() * canvas.width;
+        particles.forEach(p => {
+          if (p.type === 'confetti') {
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.size / 2, 0, Math.PI * 2);
+            ctx.fillStyle = p.color;
+            ctx.fill();
+          } else {
+            drawHeart(p.x, p.y, p.size, p.color);
+          }
+          p.y += p.speed;
+          if (p.y > canvas.height) {
+            p.y = -10;
+            p.x = Math.random() * canvas.width;
           }
         });
       }
