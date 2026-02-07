@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Proposal</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      text-align: center;
+      background: #ffe6f0;
+      color: #333;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+    .container {
+      margin-top: 100px;
+    }
+    img {
+      width: 300px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+    h1 {
+      margin-top: 20px;
+      font-size: 28px;
+      color: #d6336c;
+    }
+    .buttons {
+      margin-top: 30px;
+      position: relative;
+      height: 200px;
+    }
+    button {
+      padding: 12px 24px;
+      font-size: 18px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      position: absolute;
+    }
+    .yes {
+      background-color: #28a745;
+      color: white;
+      left: 40%;
+    }
+    .no {
+      background-color: #dc3545;
+      color: white;
+      left: 55%;
+    }
+    #celebration {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <img src="https://example.com/your-romantic-image.jpg" alt="Love Image">
+    <h1>"Will you be the love of my life forever?"</h1>
+    <div class="buttons">
+      <button class="yes" onclick="celebrate()">Yes</button>
+      <button class="no" id="noBtn">No</button>
+    </div>
+  </div>
+  <canvas id="celebration"></canvas>
+
+  <script>
+    // Make "No" button run away
+    const noBtn = document.getElementById('noBtn');
+    noBtn.addEventListener('mouseover', () => {
+      const container = document.querySelector('.buttons');
+      const maxX = container.offsetWidth - noBtn.offsetWidth;
+      const maxY = container.offsetHeight - noBtn.offsetHeight;
+      const newX = Math.floor(Math.random() * maxX);
+      const newY = Math.floor(Math.random() * maxY);
+      noBtn.style.left = newX + 'px';
+      noBtn.style.top = newY + 'px';
+    });
+
+    // Confetti celebration
+    function celebrate() {
+      alert('Yay! You said YES ❤️');
+      const canvas = document.getElementById('celebration');
+      const ctx = canvas.getContext('2d');
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+
+      const confetti = [];
+      for (let i = 0; i < 200; i++) {
+        confetti.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height - canvas.height,
+          r: Math.random() * 6 + 2,
+          d: Math.random() * 0.5 + 0.5,
+          color: `hsl(${Math.random() * 360}, 100%, 50%)`
+        });
+      }
+
+      function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        confetti.forEach(c => {
+          ctx.beginPath();
+          ctx.arc(c.x, c.y, c.r, 0, Math.PI * 2, false);
+          ctx.fillStyle = c.color;
+          ctx.fill();
+        });
+        update();
+      }
+
+      function update() {
+        confetti.forEach(c => {
+          c.y += c.d * 5;
+          if (c.y > canvas.height) {
+            c.y = -10;
+            c.x = Math.random() * canvas.width;
+          }
+        });
+      }
+
+      setInterval(draw, 30);
+    }
+  </script>
+</body>
+</html>
