@@ -61,7 +61,7 @@
 </head>
 <body>
   <div class="container">
-    <img src="https://github.com/VKumar881/proposal/blob/main/dummy/sample.jpeg" alt="Love Image">
+    <img src="https://raw.githubusercontent.com/VKumar881/proposal/main/sample.jpeg" alt="Love Image">
     <h1>"Will you be the love of my life forever?"</h1>
     <div class="buttons">
       <button class="yes" onclick="celebrate()">Yes</button>
@@ -83,7 +83,7 @@
       noBtn.style.top = newY + 'px';
     });
 
-    // Confetti celebration
+    // Heart celebration
     function celebrate() {
       alert('Yay! You said YES ❤️');
       const canvas = document.getElementById('celebration');
@@ -91,34 +91,38 @@
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
 
-      const confetti = [];
-      for (let i = 0; i < 200; i++) {
-        confetti.push({
+      const hearts = [];
+      for (let i = 0; i < 100; i++) {
+        hearts.push({
           x: Math.random() * canvas.width,
-          y: Math.random() * canvas.height - canvas.height,
-          r: Math.random() * 6 + 2,
-          d: Math.random() * 0.5 + 0.5,
-          color: `hsl(${Math.random() * 360}, 100%, 50%)`
+          y: canvas.height + Math.random() * 200,
+          size: Math.random() * 20 + 10,
+          speed: Math.random() * 2 + 1,
+          color: `hsl(${Math.random() * 30 + 330}, 100%, 60%)`
         });
+      }
+
+      function drawHeart(x, y, size, color) {
+        ctx.save();
+        ctx.translate(x, y);
+        ctx.scale(size / 20, size / 20);
+        ctx.beginPath();
+        ctx.moveTo(0, 0);
+        ctx.bezierCurveTo(-10, -10, -20, 10, 0, 20);
+        ctx.bezierCurveTo(20, 10, 10, -10, 0, 0);
+        ctx.fillStyle = color;
+        ctx.fill();
+        ctx.restore();
       }
 
       function draw() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        confetti.forEach(c => {
-          ctx.beginPath();
-          ctx.arc(c.x, c.y, c.r, 0, Math.PI * 2, false);
-          ctx.fillStyle = c.color;
-          ctx.fill();
-        });
-        update();
-      }
-
-      function update() {
-        confetti.forEach(c => {
-          c.y += c.d * 5;
-          if (c.y > canvas.height) {
-            c.y = -10;
-            c.x = Math.random() * canvas.width;
+        hearts.forEach(h => {
+          drawHeart(h.x, h.y, h.size, h.color);
+          h.y -= h.speed;
+          if (h.y < -20) {
+            h.y = canvas.height + 20;
+            h.x = Math.random() * canvas.width;
           }
         });
       }
