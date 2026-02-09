@@ -11,20 +11,7 @@
       color: #5a3e2b;
       margin: 0;
       padding: 50px;
-      overflow: hidden;
-    }
-    #sparkler {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 1; /* canvas behind */
-      pointer-events: none;
-    }
-    .container {
-      position: relative;
-      z-index: 2; /* keep image and text above canvas */
+      animation: fadeIn 2s ease-in;
     }
     h1 {
       font-size: 36px;
@@ -42,63 +29,21 @@
       border-radius: 12px;
       box-shadow: 0 4px 8px rgba(0,0,0,0.3);
     }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
   </style>
 </head>
 <body>
-  <canvas id="sparkler"></canvas>
+  <h1>🍫 Happy Chocolate Day 💖</h1>
+  <p>
+    Just like chocolate, you make my life sweet and delightful.  
+    Every moment with you melts my heart like a soft truffle.  
+    I promise to share all my joys, sorrows, and chocolates with you forever. 💕  
+    You are my sweetest gift from life. 🥰
+  </p>
 
-  <div class="container">
-    <h1>🍫 Happy Chocolate Day 💖</h1>
-    <p>
-      Just like chocolate, you make my life sweet and delightful.  
-      Every moment with you melts my heart like a soft truffle.  
-      I promise to share all my joys, sorrows, and chocolates with you forever. 💕  
-      You are my sweetest gift from life. 🥰
-    </p>
-
-    <img src="https://raw.githubusercontent.com/VKumar881/proposal/main/Chocklet.png" alt="Chocolate Love">
-  </div>
-
-  <script>
-    const canvas = document.getElementById('sparkler');
-    const ctx = canvas.getContext('2d');
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-
-    const sparks = [];
-    for (let i = 0; i < 200; i++) {
-      sparks.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        size: Math.random() * 3 + 2,
-        speedY: Math.random() * 1 + 0.5,
-        color: `hsl(${Math.random()*360},100%,70%)`,
-        alpha: 1
-      });
-    }
-
-    function draw() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      sparks.forEach(s => {
-        ctx.beginPath();
-        ctx.arc(s.x, s.y, s.size, 0, Math.PI * 2);
-        ctx.fillStyle = s.color;
-        ctx.globalAlpha = s.alpha;
-        ctx.fill();
-        ctx.globalAlpha = 1;
-
-        s.y += s.speedY;
-        s.alpha -= 0.01;
-        if (s.alpha <= 0) {
-          s.x = Math.random() * canvas.width;
-          s.y = 0;
-          s.alpha = 1;
-          s.color = `hsl(${Math.random()*360},100%,70%)`;
-        }
-      });
-    }
-
-    setInterval(draw, 30);
-  </script>
+  <img src="https://raw.githubusercontent.com/VKumar881/proposal/main/Chocklet.png" alt="Chocolate Love">
 </body>
 </html>
