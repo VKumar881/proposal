@@ -61,8 +61,8 @@
 </head>
 <body>
   <div class="container">
-    <img src="https://raw.githubusercontent.com/VKumar881/proposal/main/forYou.jpeg" alt="Love Image">
-    <h1>"Will you be my sweet chocolate till my last breath?"</h1>
+    <img src="https://raw.githubusercontent.com/VKumar881/proposal/main/ji.jpeg" alt="Love Image">
+    <h1>"Will you be the love of my life forever?"</h1>
     <div class="buttons">
       <button class="yes" onclick="celebrate()">Yes</button>
       <button class="no" id="noBtn">No</button>
@@ -83,7 +83,7 @@
     noBtn.style.top = newY + 'px';
   });
 
-  // Firework celebration with heart particles + redirect to chocolate.html
+  // Firework celebration with heart particles + redirect
   function celebrate() {
     alert('Yay! You said YES ❤️');
     const canvas = document.getElementById('celebration');
@@ -130,7 +130,7 @@
           drawHeart(p.x, p.y, p.size, p.color);
           p.x += Math.cos(p.angle) * p.speed;
           p.y += Math.sin(p.angle) * p.speed;
-          p.speed *= 0.95;
+          p.speed *= 0.95; // slow down
         });
       });
     }
@@ -140,7 +140,7 @@
     // After 3 seconds, redirect to message.html
     setTimeout(() => {
       clearInterval(interval);
-      window.location.href = "chockeletDay2.html";
+      window.location.href = "message.html";
     }, 3000);
   }
 </script>
