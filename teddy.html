@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Teddy Day</title>
+  <style>
+    body {
+      font-family: 'Georgia', serif;
+      text-align: center;
+      background: #fdf6f9;
+      color: #6b3e5c;
+      margin: 0;
+      padding: 50px;
+      overflow: hidden;
+    }
+    #sparkler {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1; /* canvas behind */
+      pointer-events: none;
+    }
+    .container {
+      position: relative;
+      z-index: 2; /* teddy image and text above canvas */
+    }
+    h1 {
+      font-size: 36px;
+      margin-bottom: 20px;
+      color: #d6336c;
+    }
+    p {
+      font-size: 22px;
+      line-height: 1.6;
+      white-space: pre-line;
+    }
+    img {
+      width: 250px;
+      margin-top: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    }
+  </style>
+</head>
+<body>
+  <canvas id="sparkler"></canvas>
+
+  <div class="container">
+    <h1>🧸 Happy Teddy Day 💖</h1>
+    <p>
+      This teddy carries my warm hug for you.  
+
+      No matter how hectic life becomes,  
+      no matter how much distance comes between us,  
+      my love and care will always reach you.  
+
+      Because true love is not about being together all the time —  
+      it’s about the comfort and connection we feel in our hearts.  
+
+      Even when we’re far apart, my heart remains with you.  
+      Whenever you hold this teddy, feel my love surrounding you.  
+
+      Distance can keep us apart physically, but it can never break our bond.  
+      You are my calm, my joy, and my forever love.  
+
+      This teddy is a sweet reminder that I am always with you — today, tomorrow, and forever. ❤️🧸
+    </p>
+
+    <img src="https://raw.githubusercontent.com/VKumar881/proposal/main/TeddyPIc.png" alt="Teddy Love">
+  </div>
+
+  <script>
+    const canvas = document.getElementById('sparkler');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const sparks = [];
+    for (let i = 0; i < 200; i++) {
+      sparks.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        size: Math.random() * 3 + 2,
+        speedY: Math.random() * 1 + 0.5,
+        color: `hsl(${Math.random()*360},100%,70%)`,
+        alpha: 1
+      });
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      // Glowing "I Love You" text
+      ctx.font = "bold 60px Arial";
+      ctx.textAlign = "center";
+      ctx.fillStyle = "red";
+      ctx.shadowColor = "pink";
+      ctx.shadowBlur = 20;
+      ctx.fillText("I ❤️ Love You", canvas.width/2, canvas.height/2);
+
+      // Sparkler particles
+      sparks.forEach(s => {
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.size, 0, Math.PI * 2);
+        ctx.fillStyle = s.color;
+        ctx.globalAlpha = s.alpha;
+        ctx.fill();
+        ctx.globalAlpha = 1;
+
+        s.y += s.speedY;
+        s.alpha -= 0.01;
+        if (s.alpha <= 0) {
+          s.x = Math.random() * canvas.width;
+          s.y = 0;
+          s.alpha = 1;
+          s.color = `hsl(${Math.random()*360},100%,70%)`;
+        }
+      });
+    }
+
+    setInterval(draw, 30);
+  </script>
+</body>
+</html>
