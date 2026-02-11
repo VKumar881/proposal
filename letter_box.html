@@ -15,8 +15,8 @@
 
     .box {
       position: relative;
-      width: 300px;
-      height: 200px;
+      width: 320px;
+      height: 220px;
       margin: 50px auto;
       background: #d6336c;
       border-radius: 12px;
@@ -34,20 +34,25 @@
       background: #b22234;
       transform-origin: top;
       transition: transform 1s ease;
+      z-index: 2;
     }
 
     .message {
       position: absolute;
-      bottom: 0;
+      top: 50%;
+      left: 0;
       width: 100%;
-      height: 50%;
+      height: 70%;
       background: #fff;
       color: #d6336c;
-      font-size: 20px;
+      font-size: 18px;
       line-height: 1.4;
       padding: 10px;
+      box-sizing: border-box;
       transform: translateY(100%);
       transition: transform 1s ease;
+      overflow-y: auto;
+      z-index: 1;
     }
 
     .box.open .lid {
@@ -57,6 +62,16 @@
     .box.open .message {
       transform: translateY(0);
     }
+
+    /* Couple hands overlay */
+    .hands {
+      position: absolute;
+      bottom: -20px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 200px;
+      z-index: 3; /* above box */
+    }
   </style>
 </head>
 <body>
@@ -65,16 +80,19 @@
   <div class="box" onclick="openBox()">
     <div class="lid"></div>
     <div class="message">
-      My dearest love,<br>
-      ❤️ A Promise, Not Perfection❤️
-If I make any mistakes, please correct me.
-If I ever hurt you, please confess to me.
-If I forget something, please remind me.
-If I can't give you time, please understand me.
-I'm full of faults and imperfections, please don't blame me and stay loyal to me. Because you mean the world to me.
-And I promise I’ll try in every possible way to make your life more happening and more exciting.<br>
+      My dearest love,<br><br>
+      ❤️ A Promise, Not Perfection ❤️<br>
+      If I make any mistakes, please correct me.<br>
+      If I ever hurt you, please confess to me.<br>
+      If I forget something, please remind me.<br>
+      If I can't give you time, please understand me.<br>
+      I'm full of faults and imperfections, please don't blame me and stay loyal to me.<br>
+      Because you mean the world to me.<br>
+      And I promise I’ll try in every possible way to make your life more happening and more exciting.<br><br>
       Happy Promise Day!
     </div>
+    <!-- Couple hands image overlay -->
+    <img src="couple_hands.png" alt="Couple Hands" class="hands">
   </div>
 
   <script>
