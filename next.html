@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Valentine Special</title>
+<style>
+body{
+  margin:0; font-family: 'Arial', sans-serif;
+  background:#0b0b0b; color:white; display:flex; justify-content:center; align-items:center; height:100vh;
+}
+#container{
+  width:90%; max-width:900px; text-align:center; background:#111; padding:20px; border-radius:12px; box-shadow:0 0 15px rgba(255,0,0,.3);
+}
+#title{font-size:26px; margin-bottom:15px;}
+#screen{
+  width:100%; height:450px; background:#000; border-radius:10px; overflow:hidden; position:relative;
+}
+.slide{
+  position:absolute; inset:0; display:none; align-items:center; justify-content:center; flex-direction:column;
+}
+.slide.active{display:flex;}
+.btn{
+  margin-top:15px; padding:10px 20px; background:#ff004c; border:none; color:white; border-radius:6px; cursor:pointer; font-size:16px;
+}
+/* Slide 1 */
+#s1{background:#ffb6c1; color:black;}
+#s1 img{width:120px; border-radius:10px; margin:5px;}
+#gallery{display:flex; gap:10px; justify-content:center; flex-wrap:wrap;}
+
+/* Slide 2 */
+#s2{background:#0b0b0b;}
+#love{
+  font-size:60px; font-weight:bold; color:#ff004c;
+  animation:pulse 1.2s infinite;
+}
+@keyframes pulse{0%{transform:scale(1);}50%{transform:scale(1.2);}100%{transform:scale(1);}}
+
+/* Slide 3 */
+#s3{background:linear-gradient(#020024,#090979,#00d4ff);}
+.heart{
+  position:relative; width:120px; height:110px; transform:rotate(-45deg);
+}
+.heart:before,.heart:after{
+  content:''; position:absolute; width:120px; height:110px; border-radius:50%; background:red;
+}
+.heart:before{top:-60px; left:0;}
+.heart:after{left:60px; top:0;}
+
+/* Slide 4 */
+#s4{background:url('https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&w=900&q=80') center/cover no-repeat;}
+#msg{
+  background:rgba(0,0,0,.6); padding:20px; border-radius:10px;
+}
+</style>
+</head>
+<body>
+<div id="container">
+  <div id="title">Best Valentine Day Special Project 💖</div>
+  <div id="screen">
+    <div class="slide active" id="s1">
+      <h2>My Love 💕</h2>
+      <div id="gallery">
+        <img src="https://via.placeholder.com/120" />
+        <img src="https://via.placeholder.com/120" />
+        <img src="https://via.placeholder.com/120" />
+      </div>
+      <p>You are my sweetest memory.</p>
+    </div>
+
+    <div class="slide" id="s2">
+      <div id="love">I LOVE YOU</div>
+    </div>
+
+    <div class="slide" id="s3">
+      <div class="heart"></div>
+    </div>
+
+    <div class="slide" id="s4">
+      <div id="msg">
+        <h2>Forever & Always</h2>
+        <p>Distance means nothing when someone means everything. 💞</p>
+      </div>
+    </div>
+  </div>
+  <button class="btn" onclick="nextSlide()">Next ➤</button>
+</div>
+
+<script>
+let index = 0;
+const slides = document.querySelectorAll('.slide');
+function nextSlide(){
+  slides[index].classList.remove('active');
+  index = (index + 1) % slides.length;
+  slides[index].classList.add('active');
+}
+</script>
+</body>
+</html>
