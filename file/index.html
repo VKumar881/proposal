@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Proposal</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      text-align: center;
+      background: #ffe6f0;
+      color: #333;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+    .container {
+      margin-top: 100px;
+    }
+    img {
+      width: 300px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+    h1 {
+      margin-top: 20px;
+      font-size: 28px;
+      color: #d6336c;
+    }
+    .buttons {
+      margin-top: 30px;
+      position: relative;
+      height: 200px;
+    }
+    button {
+      padding: 12px 24px;
+      font-size: 18px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      position: absolute;
+    }
+    .yes {
+      background-color: #28a745;
+      color: white;
+      left: 40%;
+    }
+    .no {
+      background-color: #dc3545;
+      color: white;
+      left: 55%;
+    }
+    #celebration {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <img src="https://raw.githubusercontent.com/VKumar881/proposal/main/Teddy.png" alt="Teddy Image">
+    <h1>"I know you love teddies — can I be your teddy forever? 🧸❤️"</h1>
+    <div class="buttons">
+      <button class="yes" onclick="celebrate()">Yes</button>
+      <button class="no" id="noBtn">No</button>
+    </div>
+  </div>
+  <canvas id="celebration"></canvas>
+
+ <script>
+  // Make "No" button run away
+  const noBtn = document.getElementById('noBtn');
+  noBtn.addEventListener('mouseover', () => {
+    const container = document.querySelector('.buttons');
+    const maxX = container.offsetWidth - noBtn.offsetWidth;
+    const maxY = container.offsetHeight - noBtn.offsetHeight;
+    const newX = Math.floor(Math.random() * maxX);
+    const newY = Math.floor(Math.random() * maxY);
+    noBtn.style.left = newX + 'px';
+    noBtn.style.top = newY + 'px';
+  });
+
+  // Firework celebration with heart particles + redirect to chocolate.html
+  function celebrate() {
+    alert('Yay! You said YES ❤️');
+    const canvas = document.getElementById('celebration');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const fireworks = [];
+    for (let i = 0; i < 20; i++) {
+      fireworks.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height / 2,
+        particles: []
+      });
+      for (let j = 0; j < 40; j++) {
+        fireworks[i].particles.push({
+          x: fireworks[i].x,
+          y: fireworks[i].y,
+          angle: Math.random() * 2 * Math.PI,
+          speed: Math.random() * 5 + 2,
+          size: Math.random() * 20 + 10,
+          color: `hsl(${Math.random() * 360}, 100%, 60%)`
+        });
+      }
+    }
+
+    function drawHeart(x, y, size, color) {
+      ctx.save();
+      ctx.translate(x, y);
+      ctx.scale(size / 20, size / 20);
+      ctx.beginPath();
+      ctx.moveTo(0, 0);
+      ctx.bezierCurveTo(-10, -10, -20, 10, 0, 20);
+      ctx.bezierCurveTo(20, 10, 10, -10, 0, 0);
+      ctx.fillStyle = color;
+      ctx.fill();
+      ctx.restore();
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      fireworks.forEach(fw => {
+        fw.particles.forEach(p => {
+          drawHeart(p.x, p.y, p.size, p.color);
+          p.x += Math.cos(p.angle) * p.speed;
+          p.y += Math.sin(p.angle) * p.speed;
+          p.speed *= 0.95;
+        });
+      });
+    }
+
+    let interval = setInterval(draw, 30);
+
+    // After 3 seconds, redirect to message.html
+    setTimeout(() => {
+      clearInterval(interval);
+      window.location.href = "teddy.html";
+    }, 3000);
+  }
+</script>
+</body>
+</html>
