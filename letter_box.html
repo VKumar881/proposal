@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Letter Box Surprise</title>
+  <style>
+    body {
+      font-family: 'Georgia', serif;
+      text-align: center;
+      background: #fff0f5;
+      color: #d6336c;
+      margin: 0;
+      padding: 50px;
+    }
+
+    .box {
+      position: relative;
+      width: 300px;
+      height: 200px;
+      margin: 50px auto;
+      background: #d6336c;
+      border-radius: 12px;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .lid {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 50%;
+      background: #b22234;
+      transform-origin: top;
+      transition: transform 1s ease;
+    }
+
+    .message {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      height: 50%;
+      background: #fff;
+      color: #d6336c;
+      font-size: 20px;
+      line-height: 1.4;
+      padding: 10px;
+      transform: translateY(100%);
+      transition: transform 1s ease;
+    }
+
+    .box.open .lid {
+      transform: rotateX(-120deg);
+    }
+
+    .box.open .message {
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+  <h1>💌 Letter Box Surprise 💌</h1>
+
+  <div class="box" onclick="openBox()">
+    <div class="lid"></div>
+    <div class="message">
+      My dearest love,<br>
+      You are my joy, my calm, and my forever. ❤️<br>
+      Happy Teddy Day!
+    </div>
+  </div>
+
+  <script>
+    function openBox() {
+      document.querySelector('.box').classList.toggle('open');
+    }
+  </script>
+</body>
+</html>
