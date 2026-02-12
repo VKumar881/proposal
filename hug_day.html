@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Letter Box Surprise - Hug Day</title>
+  <style>
+    body {
+      font-family: 'Georgia', serif;
+      text-align: center;
+      background: #fff0f5;
+      color: #d6336c;
+      margin: 0;
+      padding: 50px;
+      overflow: hidden;
+    }
+
+    .box {
+      position: relative;
+      width: 350px;
+      height: 250px;
+      margin: 50px auto;
+      background: #d6336c;
+      border-radius: 12px;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+      cursor: pointer;
+      overflow: hidden;
+    }
+
+    .lid {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 40%;
+      background: #b22234;
+      transform-origin: top;
+      transition: transform 1s ease;
+      z-index: 2;
+    }
+
+    .message {
+      position: absolute;
+      top: 40%;
+      left: 0;
+      width: 100%;
+      height: 60%;
+      background: #fff;
+      color: #d6336c;
+      font-size: 18px;
+      line-height: 1.4;
+      padding: 10px;
+      box-sizing: border-box;
+      transform: translateY(100%);
+      transition: transform 1s ease;
+      overflow-y: auto;
+      z-index: 1;
+    }
+
+    .box.open .lid {
+      transform: rotateX(-120deg);
+    }
+
+    .box.open .message {
+      transform: translateY(0);
+    }
+
+    /* Hug emoji animation */
+    .hug {
+      position: absolute;
+      font-size: 28px;
+      animation: floatUp 3s ease forwards;
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(0); opacity: 1; }
+      100% { transform: translateY(-200px); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+  <h1>💌 THANK YOU 💌</h1>
+
+  <div class="box" onclick="openBox()">
+    <div class="lid"></div>
+    <div class="message">
+      🤗💞 Happy Hug Day! 💞🤗 <br><br>
+      My dearest love,<br><br>
+      Whenever life feels heavy, I’ll be your hug 🤗.<br>
+      Whenever you feel alone, I’ll wrap you in my arms 💞.<br>
+      A hug is not just closeness, it’s a promise of comfort and care.<br><br>
+      Today I send you countless warm hugs 🤗🤗🤗<br>
+      to remind you that you are my safe place,<br>
+      my joy, and my forever. ❤️<br><br>
+      Happy Hug Day, my love! 💕
+    </div>
+  </div>
+
+  <script>
+    function openBox() {
+      const box = document.querySelector('.box');
+      box.classList.toggle('open');
+
+      if (box.classList.contains('open')) {
+        // release hugging emojis
+        for (let i = 0; i < 6; i++) {
+          const hug = document.createElement('div');
+          hug.className = 'hug';
+          hug.textContent = '🤗';
+          hug.style.left = (box.offsetLeft + 50 + Math.random()*200) + 'px';
+          hug.style.top = (box.offsetTop + 150) + 'px';
+          document.body.appendChild(hug);
+
+          setTimeout(() => hug.remove(), 3000);
+        }
+      }
+    }
+  </script>
+</body>
+</html>
