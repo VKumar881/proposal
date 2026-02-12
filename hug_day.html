@@ -67,8 +67,8 @@
     /* Hugging dolls */
     .doll {
       position: absolute;
-      bottom: 10px;
-      font-size: 50px;
+      bottom: 20px;
+      font-size: 60px;
       transition: all 2s ease;
     }
     .left-doll {
@@ -78,10 +78,18 @@
       right: -80px;
     }
     .box.open .left-doll {
-      left: 80px; /* move inside */
+      left: 100px;
+      animation: hugBounce 1s ease forwards;
     }
     .box.open .right-doll {
-      right: 80px; /* move inside */
+      right: 100px;
+      animation: hugBounce 1s ease forwards;
+    }
+
+    @keyframes hugBounce {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+      100% { transform: scale(1); }
     }
   </style>
 </head>
@@ -101,7 +109,7 @@
       my joy, and my forever. ❤️<br><br>
       Happy Hug Day, my love! 💕
     </div>
-    <!-- Hugging dolls (using emoji for simplicity) -->
+    <!-- Hugging dolls (using teddy emoji for simplicity) -->
     <div class="doll left-doll">🧸</div>
     <div class="doll right-doll">🧸</div>
   </div>
