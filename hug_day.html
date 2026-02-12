@@ -64,16 +64,24 @@
       transform: translateY(0);
     }
 
-    /* Hug emoji animation */
-    .hug {
+    /* Hugging dolls */
+    .doll {
       position: absolute;
-      font-size: 28px;
-      animation: floatUp 3s ease forwards;
+      bottom: 10px;
+      font-size: 50px;
+      transition: all 2s ease;
     }
-
-    @keyframes floatUp {
-      0% { transform: translateY(0); opacity: 1; }
-      100% { transform: translateY(-200px); opacity: 0; }
+    .left-doll {
+      left: -80px;
+    }
+    .right-doll {
+      right: -80px;
+    }
+    .box.open .left-doll {
+      left: 80px; /* move inside */
+    }
+    .box.open .right-doll {
+      right: 80px; /* move inside */
     }
   </style>
 </head>
@@ -93,26 +101,14 @@
       my joy, and my forever. ❤️<br><br>
       Happy Hug Day, my love! 💕
     </div>
+    <!-- Hugging dolls (using emoji for simplicity) -->
+    <div class="doll left-doll">🧸</div>
+    <div class="doll right-doll">🧸</div>
   </div>
 
   <script>
     function openBox() {
-      const box = document.querySelector('.box');
-      box.classList.toggle('open');
-
-      if (box.classList.contains('open')) {
-        // release hugging emojis
-        for (let i = 0; i < 6; i++) {
-          const hug = document.createElement('div');
-          hug.className = 'hug';
-          hug.textContent = '🤗';
-          hug.style.left = (box.offsetLeft + 50 + Math.random()*200) + 'px';
-          hug.style.top = (box.offsetTop + 150) + 'px';
-          document.body.appendChild(hug);
-
-          setTimeout(() => hug.remove(), 3000);
-        }
-      }
+      document.querySelector('.box').classList.toggle('open');
     }
   </script>
 </body>
