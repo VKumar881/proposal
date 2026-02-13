@@ -7,48 +7,46 @@
     body {
       font-family: 'Georgia', serif;
       text-align: center;
-      background: #fff0f5;
+      background: #fbe9e7;
       color: #d6336c;
       margin: 0;
       padding: 50px;
-      overflow: hidden;
     }
 
-    .box {
+    .envelope {
       position: relative;
-      width: 350px;
-      height: 250px;
+      width: 300px;
+      height: 200px;
       margin: 50px auto;
-      background: #d6336c;
-      border-radius: 12px;
+      background: #ff80ab;
+      border-radius: 8px;
       box-shadow: 0 6px 12px rgba(0,0,0,0.3);
       cursor: pointer;
       overflow: hidden;
     }
 
-    .lid {
+    .flap {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
-      height: 40%;
-      background: #b22234;
+      height: 50%;
+      background: #f06292;
       transform-origin: top;
       transition: transform 1s ease;
       z-index: 2;
     }
 
-    .message {
+    .card {
       position: absolute;
-      top: 40%;
-      left: 0;
+      bottom: 0;
       width: 100%;
-      height: 60%;
+      height: 100%;
       background: #fff;
       color: #d6336c;
       font-size: 18px;
       line-height: 1.4;
-      padding: 10px;
+      padding: 20px;
       box-sizing: border-box;
       transform: translateY(100%);
       transition: transform 1s ease;
@@ -56,11 +54,11 @@
       z-index: 1;
     }
 
-    .box.open .lid {
+    .envelope.open .flap {
       transform: rotateX(-120deg);
     }
 
-    .box.open .message {
+    .envelope.open .card {
       transform: translateY(0);
     }
 
@@ -105,11 +103,11 @@
   </style>
 </head>
 <body>
-  <h1>💌 Kiss Day Surprise 💌</h1>
+  <h1>💌 Happy Kiss Day  💌</h1>
 
-  <div class="box" onclick="openBox()">
-    <div class="lid"></div>
-    <div class="message">
+ <div class="envelope" onclick="openEnvelope()">
+    <div class="flap"></div>
+    <div class="card">
       💋 Happy Kiss Day! 💋 <br><br>
       My love,<br><br>
       A kiss is a secret told to the mouth instead of the ear.  
