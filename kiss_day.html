@@ -75,11 +75,11 @@
     .right-doll {
       right: -100px;
     }
-    .box.open .left-doll {
+    .envelope.open .left-doll {
       left: 120px;
       animation: kissLean 2s ease forwards;
     }
-    .box.open .right-doll {
+    .envelope.open .right-doll {
       right: 120px;
       animation: kissLean 2s ease forwards;
     }
@@ -103,9 +103,9 @@
   </style>
 </head>
 <body>
-  <h1>💌 Happy Kiss Day  💌</h1>
+  <h1>💌 Happy Kiss Day 💌</h1>
 
- <div class="envelope" onclick="openEnvelope()">
+  <div class="envelope" onclick="openEnvelope()">
     <div class="flap"></div>
     <div class="card">
       💋 Happy Kiss Day! 💋 <br><br>
@@ -121,18 +121,18 @@
   </div>
 
   <script>
-    function openBox() {
-      const box = document.querySelector('.box');
-      box.classList.toggle('open');
+    function openEnvelope() {
+      const envelope = document.querySelector('.envelope');
+      envelope.classList.toggle('open');
 
-      if (box.classList.contains('open')) {
+      if (envelope.classList.contains('open')) {
         // release kiss emojis
         for (let i = 0; i < 6; i++) {
           const kiss = document.createElement('div');
           kiss.className = 'kiss';
           kiss.textContent = '💋';
-          kiss.style.left = (box.offsetLeft + 50 + Math.random()*200) + 'px';
-          kiss.style.top = (box.offsetTop + 150) + 'px';
+          kiss.style.left = (envelope.offsetLeft + 50 + Math.random()*200) + 'px';
+          kiss.style.top = (envelope.offsetTop + 150) + 'px';
           document.body.appendChild(kiss);
 
           setTimeout(() => kiss.remove(), 3000);
