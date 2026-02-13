@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Be My Valentine</title>
+  <style>
+    body {
+      font-family: 'Georgia', serif;
+      text-align: center;
+      background: #fff0f5;
+      color: #d6336c;
+      margin: 0;
+      padding: 50px;
+    }
+    h1 {
+      font-size: 36px;
+      margin-bottom: 20px;
+    }
+    .buttons {
+      margin-top: 40px;
+    }
+    button {
+      padding: 12px 24px;
+      font-size: 20px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      margin: 10px;
+    }
+    #yes-button {
+      background-color: #28a745;
+      color: white;
+    }
+    #no-button {
+      background-color: #dc3545;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+
+  <img src="https://raw.githubusercontent.com/VKumar881/proposal/main/kiss.png" alt="Valentine Promise" width="300">
+
+  <h1>💖🫦 If I kiss your forehead, will you feel safe with me? 💋💖</h1>
+
+  <div class="buttons">
+    <button id="yes-button" onclick="handleYesClick()">Yes</button>
+    <button id="no-button" onclick="handleNoClick()">No</button>
+  </div>
+
+  <script>
+    let messageIndex = 0;
+
+    const messages = [
+      "Are you sure? 😢",
+      "Please say yes! 🥺",
+      "Last chance... 💔",
+      "You can’t say no forever 😏"
+    ];
+
+    function handleNoClick() {
+      const noButton = document.querySelector('#no-button');
+      const yesButton = document.querySelector('#yes-button');
+
+      noButton.textContent = messages[messageIndex];
+      messageIndex = (messageIndex + 1) % messages.length;
+
+      const currentSize = parseFloat(window.getComputedStyle(yesButton).fontSize);
+      yesButton.style.fontSize = `${currentSize + 5}px`;
+    }
+
+    function handleYesClick() {
+      window.location.href = "love.html";
+    }
+  </script>
+</body>
+</html>
