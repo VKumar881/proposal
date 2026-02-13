@@ -7,46 +7,48 @@
     body {
       font-family: 'Georgia', serif;
       text-align: center;
-      background: #fbe9e7;
+      background: #fff0f5;
       color: #d6336c;
       margin: 0;
       padding: 50px;
+      overflow: hidden;
     }
 
-    .envelope {
+    .box {
       position: relative;
-      width: 300px;
-      height: 200px;
+      width: 350px;
+      height: 250px;
       margin: 50px auto;
-      background: #ff80ab;
-      border-radius: 8px;
+      background: #d6336c;
+      border-radius: 12px;
       box-shadow: 0 6px 12px rgba(0,0,0,0.3);
       cursor: pointer;
       overflow: hidden;
     }
 
-    .flap {
+    .lid {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
-      height: 50%;
-      background: #f06292;
+      height: 40%;
+      background: #b22234;
       transform-origin: top;
       transition: transform 1s ease;
       z-index: 2;
     }
 
-    .card {
+    .message {
       position: absolute;
-      bottom: 0;
+      top: 40%;
+      left: 0;
       width: 100%;
-      height: 100%;
+      height: 60%;
       background: #fff;
       color: #d6336c;
       font-size: 18px;
       line-height: 1.4;
-      padding: 20px;
+      padding: 10px;
       box-sizing: border-box;
       transform: translateY(100%);
       transition: transform 1s ease;
@@ -54,11 +56,11 @@
       z-index: 1;
     }
 
-    .envelope.open .flap {
+    .box.open .lid {
       transform: rotateX(-120deg);
     }
 
-    .envelope.open .card {
+    .box.open .message {
       transform: translateY(0);
     }
 
@@ -75,11 +77,11 @@
     .right-doll {
       right: -100px;
     }
-    .envelope.open .left-doll {
+    .box.open .left-doll {
       left: 120px;
       animation: kissLean 2s ease forwards;
     }
-    .envelope.open .right-doll {
+    .box.open .right-doll {
       right: 120px;
       animation: kissLean 2s ease forwards;
     }
@@ -103,11 +105,11 @@
   </style>
 </head>
 <body>
-  <h1>💌 Happy Kiss Day 💌</h1>
+  <h1>💌 Happy Kiss Day! 💌</h1>
 
-  <div class="envelope" onclick="openEnvelope()">
-    <div class="flap"></div>
-    <div class="card">
+  <div class="box" onclick="openBox()">
+    <div class="lid"></div>
+    <div class="message">
       💋 Happy Kiss Day! 💋 <br><br>
       My love,<br><br>
       A kiss is a secret told to the mouth instead of the ear.  
@@ -121,18 +123,18 @@
   </div>
 
   <script>
-    function openEnvelope() {
-      const envelope = document.querySelector('.envelope');
-      envelope.classList.toggle('open');
+    function openBox() {
+      const box = document.querySelector('.box');
+      box.classList.toggle('open');
 
-      if (envelope.classList.contains('open')) {
+      if (box.classList.contains('open')) {
         // release kiss emojis
         for (let i = 0; i < 6; i++) {
           const kiss = document.createElement('div');
           kiss.className = 'kiss';
           kiss.textContent = '💋';
-          kiss.style.left = (envelope.offsetLeft + 50 + Math.random()*200) + 'px';
-          kiss.style.top = (envelope.offsetTop + 150) + 'px';
+          kiss.style.left = (box.offsetLeft + 50 + Math.random()*200) + 'px';
+          kiss.style.top = (box.offsetTop + 150) + 'px';
           document.body.appendChild(kiss);
 
           setTimeout(() => kiss.remove(), 3000);
