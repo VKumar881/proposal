@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>3D Rotating Heart</title>
+  <style>
+    body { margin: 0; background: black; overflow: hidden; }
+    .love-text {
+      color: pink;
+      font-size: 1.4rem;
+      transform: rotate(30deg);
+      text-shadow: 0 0 8px white;
+      font-family: 'Arial', sans-serif;
+    }
+  </style>
+</head>
+<body>
+<script src="https://cdn.jsdelivr.net/npm/three@0.152.2/build/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.152.2/examples/jsm/renderers/CSS2DRenderer.js"></script>
+<script>
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
+  const renderer = new THREE.WebGLRenderer();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  document.body.appendChild(renderer.domElement);
+
+  const labelRenderer = new THREE.CSS2DRenderer();
+  labelRenderer.setSize(window.innerWidth, window.innerHeight);
+  labelRenderer.domElement.style.position = 'absolute';
+  labelRenderer.domElement.style.top = '0';
+  document.body.appendChild(labelRenderer.domElement);
+
+  const group = new THREE.Group();
+  scene.add(group);
+
+  // Heart curve (parametric)
+  function heartShape(t) {
+    const x = 16 * Math.pow(Math.sin(t), 3);
+    const y = 13 * Math.cos(t) - 5 * Math.cos(2*t) - 2 * Math.cos(3*t) - Math.cos(4*t);
+    return new THREE.Vector3(x/20, y/20, 0);
+  }
+
+  for (let i = 0; i < 40; i++) {
+    const t = (i / 40) * Math.PI * 2;
+    const pos = heartShape(t);
+    const div = document.createElement('div');
+    div.className = 'love-text';
+    div.textContent = 'i love you';
+    const label = new THREE.CSS2DObject(div);
+    label.position.copy(pos);
+    group.add(label);
+  }
+
+  camera.position.z = 3;
+
+  function animate() {
+    requestAnimationFrame(animate);
+    group.rotation.y += 0.01;
+    group.rotation.x += 0.005;
+    renderer.render(scene, camera);
+    labelRenderer.render(scene, camera);
+  }
+  animate();
+</script>
+</body>
+</html>
