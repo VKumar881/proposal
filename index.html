@@ -94,30 +94,38 @@
       width: 100%; height: 100%;
       background: rgba(0,0,0,0.8);
       text-align: center;
-      padding-top: 50px;
       z-index: 999;
     }
 
     #galleryModal img {
-      width: 60%;
-      margin: 10px;
+      max-width: 80%;
+      max-height: 80%;
+      margin-top: 50px;
       border-radius: 10px;
       box-shadow: 0 5px 15px rgba(0,0,0,0.5);
     }
 
-    #galleryModal button {
-      margin-top: 20px;
-      padding: 10px 20px;
-      border: none;
-      background: var(--primary-pink);
+    .controls {
+      position: absolute;
+      top: 50%;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      transform: translateY(-50%);
       color: white;
-      border-radius: 30px;
+      font-size: 2rem;
+      font-weight: bold;
       cursor: pointer;
-      font-size: 1rem;
+      padding: 0 30px;
     }
 
-    #galleryModal button:hover {
-      background: var(--dark-pink);
+    .closeBtn {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      font-size: 2rem;
+      color: white;
+      cursor: pointer;
     }
   </style>
 </head>
@@ -150,11 +158,12 @@
 
   <!-- Gallery Modal -->
   <div id="galleryModal">
-    <img src="https://picsum.photos/id/1011/800/500" alt="Memory 1">
-    <img src="https://picsum.photos/id/1015/800/500" alt="Memory 2">
-    <img src="https://picsum.photos/id/1025/800/500" alt="Memory 3">
-    <br>
-    <button onclick="closeGallery()">Close</button>
+    <span class="closeBtn" onclick="closeGallery()">✖</span>
+    <div class="controls">
+      <span onclick="prevImage()">❮</span>
+      <span onclick="nextImage()">❯</span>
+    </div>
+    <img id="galleryImage" src="" alt="Gallery">
   </div>
 
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
@@ -164,11 +173,31 @@
       once: false
     });
 
+    // Gallery images
+    const images = [
+      "https://picsum.photos/id/1011/800/500",
+      "https://picsum.photos/id/1015/800/500",
+      "https://picsum.photos/id/1025/800/500"
+    ];
+    let currentIndex = 0;
+
     function openGallery(){
       document.getElementById("galleryModal").style.display = "block";
+      document.getElementById("galleryImage").src = images[currentIndex];
     }
+
     function closeGallery(){
       document.getElementById("galleryModal").style.display = "none";
+    }
+
+    function nextImage(){
+      currentIndex = (currentIndex + 1) % images.length;
+      document.getElementById("galleryImage").src = images[currentIndex];
+    }
+
+    function prevImage(){
+      currentIndex = (currentIndex - 1 + images.length) % images.length;
+      document.getElementById("galleryImage").src = images[currentIndex];
     }
   </script>
 </body>
