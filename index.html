@@ -119,8 +119,23 @@
         <div class="section" data-aos="fade-left">
             <h2>Moments in Time</h2>
             <p>From the small laughs to the big milestones, every second counts.</p>
-            <a href="#" class="btn" onclick="alert('I Love You! ❤️')">See Our Pictures</a>
+
+            <!-- Button -->
+            <a href="#" class="btn" onclick="showPictures()">See Our Pictures</a>
+
+            <!-- Hidden gallery -->
+            <div id="gallery" style="display:none; margin-top:20px;">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTT5hZ8_WTHTjci3EkfbVre61llJ13YOTrVwQ&s" alt="Memory 1" style="width:100%; border-radius:10px; margin-bottom:10px;">
+                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd723a6e2?auto=format&fit=crop&q=80&w=600" alt="Memory 2" style="width:100%; border-radius:10px; margin-bottom:10px;">
+                <img src="https://images.unsplash.com/photo-1544551763-46a013bb2d0b?auto=format&fit=crop&q=80&w=600" alt="Memory 3" style="width:100%; border-radius:10px; margin-bottom:10px;">
+            </div>
         </div>
+
+        <script>
+        function showPictures(){
+            document.getElementById("gallery").style.display = "block";
+        }
+        </script>
     </div>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
